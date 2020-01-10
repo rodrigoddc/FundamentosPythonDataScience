@@ -1,0 +1,1023 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{DSA-Python-Cap06-09-Stream de Dados do Twitter com MongoDB, Pandas e Scikit Learn}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Data Science Academy - Python Fundamentos - Capítulo
+6}\label{data-science-academy---python-fundamentos---capuxedtulo-6}
+
+\subsection{Download:
+http://github.com/dsacademybr}\label{download-httpgithub.comdsacademybr}
+
+    \subsection{Stream de Dados do Twitter com MongoDB, Pandas e Scikit
+Learn}\label{stream-de-dados-do-twitter-com-mongodb-pandas-e-scikit-learn}
+
+    \subsection{Preparando a Conexão com o
+Twitter}\label{preparando-a-conexuxe3o-com-o-twitter}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Instala o pacote tweepy}
+        \PY{o}{!}pip install tweepy
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Requirement already satisfied: tweepy in /home/rodrigo/anaconda3/lib/python3.6/site-packages (3.8.0)
+Requirement already satisfied: six>=1.10.0 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from tweepy) (1.11.0)
+Requirement already satisfied: requests>=2.11.1 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from tweepy) (2.18.4)
+Requirement already satisfied: requests-oauthlib>=0.7.0 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from tweepy) (1.3.0)
+Requirement already satisfied: PySocks>=1.5.7 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from tweepy) (1.6.8)
+Requirement already satisfied: chardet<3.1.0,>=3.0.2 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from requests>=2.11.1->tweepy) (3.0.4)
+Requirement already satisfied: idna<2.7,>=2.5 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from requests>=2.11.1->tweepy) (2.6)
+Requirement already satisfied: urllib3<1.23,>=1.21.1 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from requests>=2.11.1->tweepy) (1.22)
+Requirement already satisfied: certifi>=2017.4.17 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from requests>=2.11.1->tweepy) (2018.4.16)
+Requirement already satisfied: oauthlib>=3.0.0 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from requests-oauthlib>=0.7.0->tweepy) (3.1.0)
+\textcolor{ansi-red}{distributed 1.21.8 requires msgpack, which is not installed.}
+\textcolor{ansi-yellow}{You are using pip version 10.0.1, however version 19.3.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Importando os módulos Tweepy, Datetime e Json}
+        \PY{k+kn}{from} \PY{n+nn}{tweepy}\PY{n+nn}{.}\PY{n+nn}{streaming} \PY{k}{import} \PY{n}{StreamListener}
+        \PY{k+kn}{from} \PY{n+nn}{tweepy} \PY{k}{import} \PY{n}{OAuthHandler}
+        \PY{k+kn}{from} \PY{n+nn}{tweepy} \PY{k}{import} \PY{n}{Stream}
+        \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime}
+        \PY{k+kn}{import} \PY{n+nn}{json}
+\end{Verbatim}
+
+
+    Veja no manual em pdf como criar sua API no Twitter e configure as suas
+chaves abaixo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Adicione aqui sua Consumer Key}
+        \PY{n}{consumer\PYZus{}key} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kri3pZ3x0ZwCOoxtlN8FuijT0}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Adicione aqui sua Consumer Secret }
+        \PY{n}{consumer\PYZus{}secret} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{StX2vqWAFVi8OapapAk0QihyrolqRrrlvNEqdqVlQfMmYcxNON}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Adicione aqui seu Access Token}
+        \PY{n}{access\PYZus{}token} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{197894010\PYZhy{}7KvL6156XHwzi2Oga2YDIzf9nodjun5HIIStubDl}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Adicione aqui seu Access Token Secret}
+        \PY{n}{access\PYZus{}token\PYZus{}secret} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d79eDL5NEnyiiO4iGfqixgjKbbVMlPrrCR9i5tmdRj33w}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Criando as chaves de autenticação}
+        \PY{n}{auth} \PY{o}{=} \PY{n}{OAuthHandler}\PY{p}{(}\PY{n}{consumer\PYZus{}key}\PY{p}{,} \PY{n}{consumer\PYZus{}secret}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{auth}\PY{o}{.}\PY{n}{set\PYZus{}access\PYZus{}token}\PY{p}{(}\PY{n}{access\PYZus{}token}\PY{p}{,} \PY{n}{access\PYZus{}token\PYZus{}secret}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Criando uma classe para capturar os stream de dados do Twitter e }
+         \PY{c+c1}{\PYZsh{} armazenar no MongoDB}
+         \PY{k}{class} \PY{n+nc}{MyListener}\PY{p}{(}\PY{n}{StreamListener}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{on\PYZus{}data}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{dados}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{tweet} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}\PY{n}{dados}\PY{p}{)}
+                 \PY{n}{created\PYZus{}at} \PY{o}{=} \PY{n}{tweet}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{created\PYZus{}at}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                 \PY{n}{id\PYZus{}str} \PY{o}{=} \PY{n}{tweet}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}str}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                 \PY{n}{text} \PY{o}{=} \PY{n}{tweet}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                 \PY{n}{obj} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{created\PYZus{}at}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{created\PYZus{}at}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id\PYZus{}str}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{id\PYZus{}str}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{text}\PY{p}{,}\PY{p}{\PYZcb{}}
+                 \PY{n}{tweetind} \PY{o}{=} \PY{n}{col}\PY{o}{.}\PY{n}{insert\PYZus{}one}\PY{p}{(}\PY{n}{obj}\PY{p}{)}\PY{o}{.}\PY{n}{inserted\PYZus{}id}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{n}{obj}\PY{p}{)}
+                 \PY{k}{return} \PY{k+kc}{True}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Criando o objeto mylistener}
+         \PY{n}{mylistener} \PY{o}{=} \PY{n}{MyListener}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Criando o objeto mystream}
+         \PY{n}{mystream} \PY{o}{=} \PY{n}{Stream}\PY{p}{(}\PY{n}{auth}\PY{p}{,} \PY{n}{listener} \PY{o}{=} \PY{n}{mylistener}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Preparando a Conexão com o
+MongoDB}\label{preparando-a-conexuxe3o-com-o-mongodb}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Importando do PyMongo o módulo MongoClient}
+         \PY{k+kn}{from} \PY{n+nn}{pymongo} \PY{k}{import} \PY{n}{MongoClient}   
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Criando a conexão ao MongoDB}
+         \PY{n}{client} \PY{o}{=} \PY{n}{MongoClient}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{localhost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{27017}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Criando o banco de dados twitterdb}
+         \PY{n}{db} \PY{o}{=} \PY{n}{client}\PY{o}{.}\PY{n}{twitterdb}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{db}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} pymongo.database.Database
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Criando a collection \PYZdq{}col\PYZdq{}}
+         \PY{n}{col} \PY{o}{=} \PY{n}{db}\PY{o}{.}\PY{n}{tweets} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} Criando uma lista de palavras chave para buscar nos Tweets}
+         \PY{n}{keywords} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Não sei}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Convivência}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{música}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sofia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsection{Coletando os Tweets}\label{coletando-os-tweets}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} Iniciando o filtro e gravando os tweets no MongoDB}
+         \PY{n}{mystream}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{track}\PY{o}{=}\PY{n}{keywords}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'created\_at': 'Wed Dec 04 17:12:55 +0000 2019', 'id\_str': '1202274595878920192', 'text': 'não sei quem é eu e quem é a anabela', '\_id': ObjectId('5de7e91c8253cc0f76e18524')\}
+\{'created\_at': 'Wed Dec 04 17:12:55 +0000 2019', 'id\_str': '1202274596906524673', 'text': 'RT @teamkpbrasil: A @RollingStone elegeu Teenage Dream como uma das melhores músicas da década: “Se alguém fosse fazer uma fórmula científi…', '\_id': ObjectId('5de7e91c8253cc0f76e18525')\}
+\{'created\_at': 'Wed Dec 04 17:12:55 +0000 2019', 'id\_str': '1202274597116227584', 'text': 'RT @lemonadie: e @BTS\_twt faz história mais uma vez e leva TODOS os daesangs pra casa, primeiro no mma e agora no mama\textbackslash{}n\textbackslash{}n🏆 álbum do ano\textbackslash{}n🏆 mú…', '\_id': ObjectId('5de7e91c8253cc0f76e18526')\}
+\{'created\_at': 'Wed Dec 04 17:12:55 +0000 2019', 'id\_str': '1202274597724405761', 'text': '@KennedyAlencar Não sei o que aconteceu, mas quem fala aqui o que quer, tem q estar preparado para aguentar a respo… https://t.co/GQoMFFFe0T', '\_id': ObjectId('5de7e91d8253cc0f76e18527')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274598475186176', 'text': 'RT @dianasabriinaa: Há pessoas que simplesmente não conseguem o fazer{\ldots} Infelizmente https://t.co/mkINXpmUpx', '\_id': ObjectId('5de7e91d8253cc0f76e18528')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274598760435712', 'text': 'RT @chofiolmos: “Los malos métodos están bien, pero ¿y si todos hacemos música de una manera más honesta?\textbackslash{}nEspero la era en que todo el mund…', '\_id': ObjectId('5de7e91d8253cc0f76e18529')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274599465050112', 'text': 'RT @chaengswift: não ganhou soty porque é a música do século, não do ano', '\_id': ObjectId('5de7e91d8253cc0f76e1852a')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274599339282441', 'text': 'Amo ouvir essa música linda nuestro amor do rbd 😍😍💙💜', '\_id': ObjectId('5de7e91d8253cc0f76e1852b')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274600811421696', 'text': 'RT @riotwomyn\_: el varón mas mogolico de todos (para mi) es el que esucha rock/punk o etc y esta constantemente queriendo demostrar que sab…', '\_id': ObjectId('5de7e91d8253cc0f76e1852c')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274601432231941', 'text': 'RT @KCreisi: Soy fan de estar solo en mi casa y poner música a todo volumen.', '\_id': ObjectId('5de7e91d8253cc0f76e1852d')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274601289572353', 'text': 'RT @marilizpj: Golaço do Roda Viva!! @veramagalhaes é uma das jornalistas mais brilhantes do país e, como se não bastasse, tem senso de hum…', '\_id': ObjectId('5de7e91d8253cc0f76e1852e')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274601595785217', 'text': 'RT @euVickkk: não sei oq eu quero mais, os peitos ou a lingerie https://t.co/BYxsxYZLEA', '\_id': ObjectId('5de7e91e8253cc0f76e1852f')\}
+\{'created\_at': 'Wed Dec 04 17:12:56 +0000 2019', 'id\_str': '1202274602023604226', 'text': 'RT @sobergaga: Depois de inventarem fic que Invocada não é single mesmo estando em 400 playlists e sendo enviada para as rádios, agora os 4…', '\_id': ObjectId('5de7e91e8253cc0f76e18530')\}
+\{'created\_at': 'Wed Dec 04 17:12:57 +0000 2019', 'id\_str': '1202274603021848576', 'text': 'RT @CulturaTimeJust: MÚSICA | El último \#concierto de @pablolesuit antes de publicar disco será en @LaFabricaVigo.\textbackslash{}nNos lo cuenta @\_antia125…', '\_id': ObjectId('5de7e91e8253cc0f76e18531')\}
+\{'created\_at': 'Wed Dec 04 17:12:57 +0000 2019', 'id\_str': '1202274604301135881', 'text': 'RT @fffaia: eu achava que era inteligente aí eu entrei na faculdade e agora eu percebo que eu sou BURRA\textbackslash{}n\textbackslash{}neu escolhi estudar essa MERDA e eu…', '\_id': ObjectId('5de7e91e8253cc0f76e18532')\}
+\{'created\_at': 'Wed Dec 04 17:12:57 +0000 2019', 'id\_str': '1202274604699529221', 'text': 'RT @taniamota\_01: Professores que deixam ouvir música na aula são um grande SIM', '\_id': ObjectId('5de7e91e8253cc0f76e18533')\}
+\{'created\_at': 'Wed Dec 04 17:12:57 +0000 2019', 'id\_str': '1202274604993126401', 'text': 'RT @fffaia: eu achava que era inteligente aí eu entrei na faculdade e agora eu percebo que eu sou BURRA\textbackslash{}n\textbackslash{}neu escolhi estudar essa MERDA e eu…', '\_id': ObjectId('5de7e91e8253cc0f76e18534')\}
+\{'created\_at': 'Wed Dec 04 17:12:58 +0000 2019', 'id\_str': '1202274606687686664', 'text': 'RT @spidervampsz: não importa quantos anos vc tinha ou o que estava fazendo, mas com certeza essa música marcou seu 2014 https://t.co/bEjrZ…', '\_id': ObjectId('5de7e91f8253cc0f76e18535')\}
+\{'created\_at': 'Wed Dec 04 17:12:58 +0000 2019', 'id\_str': '1202274607497129990', 'text': 'A música eh só porque eu gosto dela, eu tenho namorado ok', '\_id': ObjectId('5de7e91f8253cc0f76e18536')\}
+\{'created\_at': 'Wed Dec 04 17:12:57 +0000 2019', 'id\_str': '1202274604481417216', 'text': 'RT @vnprates: Tava fazendo entrevista com uma moça aqui no trabalho, aí perguntei ela “pq você quer essa vaga?” Aí ela me mostrou um papel…', '\_id': ObjectId('5de7e91f8253cc0f76e18537')\}
+\{'created\_at': 'Wed Dec 04 17:12:57 +0000 2019', 'id\_str': '1202274604624031744', 'text': 'RT @joliefairly: o dia que eu dedicar \&gt;qualquer música do james arthur pra alguém pode ter certeza que eu tô no auge da minha paixão https:…', '\_id': ObjectId('5de7e91f8253cc0f76e18538')\}
+\{'created\_at': 'Wed Dec 04 17:12:58 +0000 2019', 'id\_str': '1202274609166508032', 'text': 'RED', '\_id': ObjectId('5de7e91f8253cc0f76e18539')\}
+\{'created\_at': 'Wed Dec 04 17:12:58 +0000 2019', 'id\_str': '1202274609485287424', 'text': 'RT @DiazCanelB: Felicitaciones Van Van. Con ustedes siempre bailaremos la mejor música cubana \#SomosCuba \#SomosContinuidad https://t.co/4XS…', '\_id': ObjectId('5de7e91f8253cc0f76e1853a')\}
+\{'created\_at': 'Wed Dec 04 17:12:58 +0000 2019', 'id\_str': '1202274610374426624', 'text': 'Não sei se garanto uma vaga pra faculdade (passe domingo) ou se passo de ano KKKKK tá foda estudar pros dois', '\_id': ObjectId('5de7e9208253cc0f76e1853b')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274611020419073', 'text': 'RT @Kauana28091895: enchi minha boca falando bem de pessoas que não sei mais quem são hoje, enxuguei lágrimas de pessoas que depois causara…', '\_id': ObjectId('5de7e9208253cc0f76e1853c')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274611100110848', 'text': 'RT @\_\_anabeatriz1: acordei tão triste poxa não sei se realmente quero viver em 2020', '\_id': ObjectId('5de7e9208253cc0f76e1853d')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274611267805186', 'text': 'RT @heartbreakelson: NOVA MÚSICA E VÍDEO HOJE ÀS 20H NO CANAL DA TRX MUSIC NO YOUTUBE! LET’S GOOOOO 🔥🔥🔥🔥🔥🔥😈😈😈 https://t.co/g8iFzmDRTe', '\_id': ObjectId('5de7e9208253cc0f76e1853e')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274611251097600', 'text': 'RT @gigiluvizeto: Eu não sei pq esse povo se incomoda com a felicidade dos outros{\ldots}', '\_id': ObjectId('5de7e9208253cc0f76e1853f')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274611573985280', 'text': 'Xime me manda audios con su música bien atr y me pone manija a mi', '\_id': ObjectId('5de7e9208253cc0f76e18540')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274611804684289', 'text': 'RT @hoscass: "O BTS n*o devia ter ganhado o SOTY porque eu acho a música horrível"\textbackslash{}n\textbackslash{}nArmys: *mostram com \&gt;\&gt;fatos\&lt;\&lt; que bwl preenchia todos o…', '\_id': ObjectId('5de7e9208253cc0f76e18541')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274611993464835', 'text': 'RT @BTSFAVTX: vocês não estão achando a bighit meio estranha não? tipo, postando videos de premiações rápido demais, contratando tradutores…', '\_id': ObjectId('5de7e9208253cc0f76e18542')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274612148658176', 'text': 'nem música eu posso ouvir, obg envolvidos', '\_id': ObjectId('5de7e9208253cc0f76e18543')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274612224176128', 'text': 'RT @CPFsCancelados: Esse vídeo com essa música dá uma energia boa https://t.co/NhaENtbqqz', '\_id': ObjectId('5de7e9208253cc0f76e18544')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274612370923520', 'text': 'RT @joliefairly: o dia que eu dedicar \&gt;qualquer música do james arthur pra alguém pode ter certeza que eu tô no auge da minha paixão https:…', '\_id': ObjectId('5de7e9208253cc0f76e18545')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274612580700161', 'text': 'RT @taeisroses: tem gente que não tá entendendo o que eu quis dizer então vamos de desenho: o problema não é você gostar mais de fancy do q…', '\_id': ObjectId('5de7e9208253cc0f76e18546')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274613172035584', 'text': 'RT @ConsueloMariaR: @Pablo\_AMP\_ @Nbarbla78 ¡Temazoooo! \textbackslash{}nSorprenderse o asustarse es aprender ..\textbackslash{}nmúsica con mayúsculas ..\textbackslash{}nexcelentes punteos…', '\_id': ObjectId('5de7e9208253cc0f76e18547')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274614438703104', 'text': 'RT @coutinhonaathi: Já me fudi tanto sentimentalmente na minha vida que hj em dia eu to oca por dentro pprt, nada mais me atinge , já me ac…', '\_id': ObjectId('5de7e9218253cc0f76e18548')\}
+\{'created\_at': 'Wed Dec 04 17:12:59 +0000 2019', 'id\_str': '1202274614325452806', 'text': 'RT @Ci\_\_dy: Kalbin kırııııııık olanlara \&lt;3333\textbackslash{}n\textbackslash{}n\#OZamanDans https://t.co/YPLNhi98By', '\_id': ObjectId('5de7e9218253cc0f76e18549')\}
+\{'created\_at': 'Wed Dec 04 17:13:00 +0000 2019', 'id\_str': '1202274614929436672', 'text': 'RT @ggukkietalent: “o que você acha de criar boa música de uma maneira honesta?" - seokjin \textbackslash{}n\textbackslash{}nKKKKKKKKKKKKK KIM SEOKJIN VC -', '\_id': ObjectId('5de7e9218253cc0f76e1854a')\}
+\{'created\_at': 'Wed Dec 04 17:13:00 +0000 2019', 'id\_str': '1202274616590454784', 'text': 'RT @lesbianforjk: yeonjun pro soobin: confie apenas no oppa, tá?\textbackslash{}n\textbackslash{}no p p a\textbackslash{}nO P P A\textbackslash{}nnão hyung, não brother ou sei lá \textbackslash{}n\textbackslash{}nOPPA\textbackslash{}n\textbackslash{}nque viadage é es…', '\_id': ObjectId('5de7e9218253cc0f76e1854b')\}
+\{'created\_at': 'Wed Dec 04 17:13:00 +0000 2019', 'id\_str': '1202274616875634690', 'text': 'RT @EjeCentral: \#Música El rapero canadiense \#Drake fue escuchado unos 28 mil millones de veces en \#Spotify 🎼🎤🎧 https://t.co/hFQfx9QOGM', '\_id': ObjectId('5de7e9218253cc0f76e1854c')\}
+\{'created\_at': 'Wed Dec 04 17:13:00 +0000 2019', 'id\_str': '1202274617211195395', 'text': 'Não sei pq tem tanta gente na minha tml reclamando do Mama??? Vcs esperavam o q??? é o Mama meu povo.. todo mundo j… https://t.co/yrVg6UlBgh', '\_id': ObjectId('5de7e9218253cc0f76e1854d')\}
+\{'created\_at': 'Wed Dec 04 17:13:00 +0000 2019', 'id\_str': '1202274617408311297', 'text': 'RT @flyyseokjin: o Seokjin dizendo que existe métodos de trapaça, e que espera que as pessoas façam música de forma honesta\textbackslash{}n\textbackslash{}neu não tô acre…', '\_id': ObjectId('5de7e9218253cc0f76e1854e')\}
+\{'created\_at': 'Wed Dec 04 17:13:01 +0000 2019', 'id\_str': '1202274619538980865', 'text': 'Eu ja tava era no chão', '\_id': ObjectId('5de7e9228253cc0f76e1854f')\}
+\{'created\_at': 'Wed Dec 04 17:13:01 +0000 2019', 'id\_str': '1202274620721844225', 'text': 'Não sei oque eu faço 😭', '\_id': ObjectId('5de7e9228253cc0f76e18550')\}
+\{'created\_at': 'Wed Dec 04 17:13:01 +0000 2019', 'id\_str': '1202274622281961473', 'text': 'RT @MySelfAndHeize: Namjoon orgulloso aplaudió a Seokjin después de que él diera su discurso hablando sobre hacer música con honestidad en…', '\_id': ObjectId('5de7e9228253cc0f76e18551')\}
+\{'created\_at': 'Wed Dec 04 17:13:01 +0000 2019', 'id\_str': '1202274622743437318', 'text': 'amanhã fazer a prova de hspb segurando na mão de deus porque até hoje eu não sei minha nota da p1 e de nenhum fichamento :)', '\_id': ObjectId('5de7e9238253cc0f76e18552')\}
+\{'created\_at': 'Wed Dec 04 17:13:01 +0000 2019', 'id\_str': '1202274620335722496', 'text': 'Continúan las actividades de fin de año de nuestra Escuela de Iniciación a la Música y a la Danza, te esperamos hoy… https://t.co/SIbSTbZpzj', '\_id': ObjectId('5de7e9238253cc0f76e18553')\}
+\{'created\_at': 'Wed Dec 04 17:13:01 +0000 2019', 'id\_str': '1202274623016128512', 'text': 'RT @nascimentocaio: As irmãs evangélicas que não cantam música de Iemanjá, mas cantam de maconha. https://t.co/NMWzc67WKz', '\_id': ObjectId('5de7e9238253cc0f76e18554')\}
+\{'created\_at': 'Wed Dec 04 17:13:02 +0000 2019', 'id\_str': '1202274624534405121', 'text': 'Twitter:Oque esta acontecendo?\textbackslash{}nEu:Num sei, acho que esse papel não bateu.\textbackslash{}n👽', '\_id': ObjectId('5de7e9238253cc0f76e18555')\}
+\{'created\_at': 'Wed Dec 04 17:13:02 +0000 2019', 'id\_str': '1202274624639246336', 'text': 'RT @seonghwagic: quando se trata de performance ateez NUNCA DECEPCIONA, essa homenagem pro bts foi tudo, os meninos performando uma música…', '\_id': ObjectId('5de7e9238253cc0f76e18556')\}
+\{'created\_at': 'Wed Dec 04 17:13:02 +0000 2019', 'id\_str': '1202274625004220416', 'text': 'RT @pret4defe: QUAL A CHANCE? KKKKKKKKKKKKKKKKKKK até onde eu sei a polícia não invade festa em mansão/iate https://t.co/4CxJnexIIr', '\_id': ObjectId('5de7e9238253cc0f76e18557')\}
+\{'created\_at': 'Wed Dec 04 17:13:02 +0000 2019', 'id\_str': '1202274625771712512', 'text': 'RT @mininumatheus: meninas: ai não sei qual é mais bonito\textbackslash{}n\textbackslash{}ngarotos do bts: https://t.co/bcszRg7cLz', '\_id': ObjectId('5de7e9238253cc0f76e18558')\}
+\{'created\_at': 'Wed Dec 04 17:13:02 +0000 2019', 'id\_str': '1202274627315208192', 'text': 'RT @seonghwagic: quando se trata de performance ateez NUNCA DECEPCIONA, essa homenagem pro bts foi tudo, os meninos performando uma música…', '\_id': ObjectId('5de7e9248253cc0f76e18559')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274627550142469', 'text': 'RT @AnittaDailyC: "Combatchy" se tornou a 2ª música de Anitta a passar duas semanas no topo do iTunes Brasil, atrás apenas de "Vai Malandra…', '\_id': ObjectId('5de7e9248253cc0f76e1855a')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274627655012352', 'text': 'RT @rafa\_andrade2: Qualquer música do Travis Scott https://t.co/AU5hkiX9tK', '\_id': ObjectId('5de7e9248253cc0f76e1855b')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274628175044609', 'text': 'RT @ttiasara: o cara fica comigo \textbackslash{}nfoi dar em cima da minha amiga \textbackslash{}nela me contou\textbackslash{}nele não sabe que eu sei \textbackslash{}ne tá dando crise de ciúme pq eu fu…', '\_id': ObjectId('5de7e9248253cc0f76e1855c')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274628191891456', 'text': '@FridaSiKahlo Es tan tan frívolo que por esa la música y el ritmo es muy bueno. Ahora si lees el fondo es tanta la… https://t.co/8f3huSIOhL', '\_id': ObjectId('5de7e9248253cc0f76e1855d')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274628871368710', 'text': "RT @Bitiiez: [INFO]🗞\textbackslash{}n\textbackslash{}nEl día hoy fue transmitida la presentación pregrabada de BTS en el Festival de Música Japonés 'FNS'.\textbackslash{}n\textbackslash{}nParte 1 - Prese…", '\_id': ObjectId('5de7e9248253cc0f76e1855e')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274628821016582', 'text': 'e a sua mãe que fazia música sertaneja pro cruzeiro 👻🅱️', '\_id': ObjectId('5de7e9248253cc0f76e1855f')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274628749709313', 'text': '@Lets\_Dex Música no fantástico???', '\_id': ObjectId('5de7e9248253cc0f76e18560')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274628963590146', 'text': 'RT @GFestivalesCDMX: ¡\#RadicalMestizo es un festival de música del mundo completamente gratis! https://t.co/3ZDYccQV4T', '\_id': ObjectId('5de7e9248253cc0f76e18561')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274629118824450', 'text': 'RT @BTSFAVTX: vocês não estão achando a bighit meio estranha não? tipo, postando videos de premiações rápido demais, contratando tradutores…', '\_id': ObjectId('5de7e9248253cc0f76e18562')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274629915684864', 'text': '"Períneo" eu só consigo lembrar de duas coisas:\textbackslash{}n1- da minha prima perguntando o que era isso e o @\_fguedes\_ respond… https://t.co/VPNfalgIX6', '\_id': ObjectId('5de7e9248253cc0f76e18563')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274630209298433', 'text': 'RT @SaintJeanpi: No me molesta fregar cuando me nace, pongo mi música y todo normal, pero si me mandan, odio hacerlo https://t.co/cGpnneJFcg', '\_id': ObjectId('5de7e9248253cc0f76e18564')\}
+\{'created\_at': 'Wed Dec 04 17:13:03 +0000 2019', 'id\_str': '1202274630872031233', 'text': '\#YoVeoSálvame', '\_id': ObjectId('5de7e9258253cc0f76e18565')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274632386125829', 'text': 'RT @lylmpeace: "Existen distintos métodos para hacer trampa, pero ¿no sería mejor hacer música más honestamente?"\textbackslash{}n\textbackslash{}nSeokjin le sirvió el Té…', '\_id': ObjectId('5de7e9258253cc0f76e18566')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274632574930945', 'text': 'Não sei talvez eu faça em casa pq quinta não terei tempo 🤔🤔 aí faço hoje', '\_id': ObjectId('5de7e9258253cc0f76e18567')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274632679735296', 'text': 'Não sei pq ainda fico surpresa com essas merdas', '\_id': ObjectId('5de7e9258253cc0f76e18568')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274633191501825', 'text': 'RT @marcilento: é impressionante pq eu ja sei que fiquei de exame da fabiana mas até a nota sair eu vou fingir q não é cmg', '\_id': ObjectId('5de7e9258253cc0f76e18569')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274632990150657', 'text': 'RT @SaintJeanpi: No me molesta fregar cuando me nace, pongo mi música y todo normal, pero si me mandan, odio hacerlo https://t.co/cGpnneJFcg', '\_id': ObjectId('5de7e9258253cc0f76e1856a')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274634307125248', 'text': 'RT @Emanoel1953: ConJur: "Procuradores da \textbackslash{}'lava jato\textbackslash{}' impõem exigências para cumprir ordem judicial."\textbackslash{}n\textbackslash{}nO Supremo/merda?\textbackslash{}n\textbackslash{}nDegustando vinho,…', '\_id': ObjectId('5de7e9258253cc0f76e1856b')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274634491670528', 'text': 'Como dizia Vitor e Leo "sei que estou amando, mas ainda não sei quem"', '\_id': ObjectId('5de7e9258253cc0f76e1856c')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274634558853120', 'text': 'chegou num nível que tem que dizer eh a pior música lançada no kpop kkkk passo mal', '\_id': ObjectId('5de7e9258253cc0f76e1856d')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274634781118470', 'text': 'RT @paulaagagliardi: 4 trabalhos, 9 provas e matéria acumulada. Eu não sei por onde começar, o que fazer, o que preciso mais ou menos, me p…', '\_id': ObjectId('5de7e9258253cc0f76e1856e')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274634772754433', 'text': 'RT @leodopastel: não sei por que vocês defendem tanto esse tal de TCC. será que ele faria o mesmo por vocês caso precisassem???', '\_id': ObjectId('5de7e9258253cc0f76e1856f')\}
+\{'created\_at': 'Wed Dec 04 17:13:04 +0000 2019', 'id\_str': '1202274635351568384', 'text': 'CNCO se encuentra nominado en 3 categorías de los \#PremiosQuiero2019 de @quieromusicatv "Mejor encuentro extraordin… https://t.co/f3vihAdUGq', '\_id': ObjectId('5de7e9268253cc0f76e18570')\}
+\{'created\_at': 'Wed Dec 04 17:13:05 +0000 2019', 'id\_str': '1202274636572037120', 'text': 'amg e eu\textbackslash{}n\textbackslash{}n- odeio sorvete\textbackslash{}n- detesto desenho animado\textbackslash{}n- tenho nojo de pipoca\textbackslash{}n- não gosto de cachorro pq tenho pavor… https://t.co/s6aNHr3O7T', '\_id': ObjectId('5de7e9268253cc0f76e18571')\}
+\{'created\_at': 'Wed Dec 04 17:13:05 +0000 2019', 'id\_str': '1202274638530826243', 'text': 'Andando o mais devagar possível dentro da UFCG pra dar tempo da minha música terminar. Quem nunca? Slow dancing in… https://t.co/lDS9ebZIyZ', '\_id': ObjectId('5de7e9268253cc0f76e18572')\}
+\{'created\_at': 'Wed Dec 04 17:13:06 +0000 2019', 'id\_str': '1202274640804098048', 'text': 'Sdds 2014 llkkkkkkk', '\_id': ObjectId('5de7e9278253cc0f76e18573')\}
+\{'created\_at': 'Wed Dec 04 17:13:06 +0000 2019', 'id\_str': '1202274642473426944', 'text': 'Hoy la cosa va más de música que sé escribir, tenía razón mi amiga Ale, de argentina cuando dijo hoy mates y guitar… https://t.co/vP4Z4X6REQ', '\_id': ObjectId('5de7e9288253cc0f76e18574')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274644516057088', 'text': 'RT @ericat\_lol: Falando mais do Absolut aqui. Chegou uma informação que ele nunca teve tendinite, ele tinha dores mas se preparou d+ em 201…', '\_id': ObjectId('5de7e9288253cc0f76e18575')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274644545462272', 'text': 'agora a gente se entendeu, não sei pq nos afastamos, mas aconteceu{\ldots} fico feliz q a fé tá tudo bem e espero q tu c… https://t.co/OzpPOXr2DY', '\_id': ObjectId('5de7e9288253cc0f76e18576')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274645443043328', 'text': 'RT @viitoriacardozo: incrível como james arthur não tem 1 música ruim https://t.co/4fwnCXPOFX', '\_id': ObjectId('5de7e9288253cc0f76e18577')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274645451431937', 'text': 'Primeira vez que vejo alguém colocar meu nome nessas brincadeira\textbackslash{}n\textbackslash{}nEspero que não seja pra coisa ruim', '\_id': ObjectId('5de7e9288253cc0f76e18578')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274645799518209', 'text': 'RT @hoscass: "O BTS n*o devia ter ganhado o SOTY porque eu acho a música horrível"\textbackslash{}n\textbackslash{}nArmys: *mostram com \&gt;\&gt;fatos\&lt;\&lt; que bwl preenchia todos o…', '\_id': ObjectId('5de7e9288253cc0f76e18579')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274647540224003', 'text': 'RT @MetralletaPD: AVISO!!!🗣️SUENA CARACAS!🎉\textbackslash{}nAsí mismo es, Fiesta Inaugural del Festival de Música \#SuenaCaracas 👉¡EN EL VALLE!🎉\textbackslash{}nVen baila💃🏽…', '\_id': ObjectId('5de7e9298253cc0f76e1857a')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274647720517632', 'text': 'RT @hoscass: "O BTS n*o devia ter ganhado o SOTY porque eu acho a música horrível"\textbackslash{}n\textbackslash{}nArmys: *mostram com \&gt;\&gt;fatos\&lt;\&lt; que bwl preenchia todos o…', '\_id': ObjectId('5de7e9298253cc0f76e1857b')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274647850586112', 'text': 'RT @flyyseokjin: o Seokjin dizendo que existe métodos de trapaça, e que espera que as pessoas façam música de forma honesta\textbackslash{}n\textbackslash{}neu não tô acre…', '\_id': ObjectId('5de7e9298253cc0f76e1857c')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274647951257600', 'text': 'RT @ThammyCaroIine: Eu amo essa música @matue30 https://t.co/KGZptELpDs', '\_id': ObjectId('5de7e9298253cc0f76e1857d')\}
+\{'created\_at': 'Wed Dec 04 17:13:07 +0000 2019', 'id\_str': '1202274648265838594', 'text': 'RT @sohumcara: é muito bom ouvir o quanto você significa para uma pessoa, ouvir um "sinto sua falta", "vi isso e lembrei de você", “sonhei…', '\_id': ObjectId('5de7e9298253cc0f76e1857e')\}
+\{'created\_at': 'Wed Dec 04 17:13:08 +0000 2019', 'id\_str': '1202274649595371525', 'text': 'RT @leticia\_izac: Não sei o que vai ser da minha vida ano que vem kkkkk só vamo na fé', '\_id': ObjectId('5de7e9298253cc0f76e1857f')\}
+\{'created\_at': 'Wed Dec 04 17:13:08 +0000 2019', 'id\_str': '1202274651109548032', 'text': 'O fantastico mundo de gumball monteiro', '\_id': ObjectId('5de7e9298253cc0f76e18580')\}
+\{'created\_at': 'Wed Dec 04 17:13:08 +0000 2019', 'id\_str': '1202274651633790981', 'text': 'Kanye West no reveião?????', '\_id': ObjectId('5de7e9298253cc0f76e18581')\}
+\{'created\_at': 'Wed Dec 04 17:13:08 +0000 2019', 'id\_str': '1202274651918995456', 'text': 'RT @limitizando: Não sei quem é mais doido, a mulher que volta pra pegar as coisas ou a criança que dá um bicudo no bandido. https://t.co/o…', '\_id': ObjectId('5de7e92a8253cc0f76e18582')\}
+\{'created\_at': 'Wed Dec 04 17:13:08 +0000 2019', 'id\_str': '1202274652174848001', 'text': 'RT @sohumcara: é muito bom ouvir o quanto você significa para uma pessoa, ouvir um "sinto sua falta", "vi isso e lembrei de você", “sonhei…', '\_id': ObjectId('5de7e92a8253cc0f76e18583')\}
+\{'created\_at': 'Wed Dec 04 17:13:09 +0000 2019', 'id\_str': '1202274653395394560', 'text': 'RT @joliefairly: o dia que eu dedicar \&gt;qualquer música do james arthur pra alguém pode ter certeza que eu tô no auge da minha paixão https:…', '\_id': ObjectId('5de7e92a8253cc0f76e18584')\}
+\{'created\_at': 'Wed Dec 04 17:13:09 +0000 2019', 'id\_str': '1202274653827403777', 'text': '[04/12 14:09] Marcos Henrique💙: Tá fzd a festa com os Brothers msm né kkk\textbackslash{}n[04/12 14:09] Gaby😔: Quem é esse ??\textbackslash{}n[04/1… https://t.co/ooSufbiGLF', '\_id': ObjectId('5de7e92a8253cc0f76e18585')\}
+\{'created\_at': 'Wed Dec 04 17:13:09 +0000 2019', 'id\_str': '1202274654511075328', 'text': 'situações que eu não sei lidar e so sei chorar', '\_id': ObjectId('5de7e92a8253cc0f76e18586')\}
+\{'created\_at': 'Wed Dec 04 17:13:09 +0000 2019', 'id\_str': '1202274654775369728', 'text': 'RT @berreccaaa: Eu era uma aluna tão boa, não sei como virei essa burra vagabunda', '\_id': ObjectId('5de7e92a8253cc0f76e18587')\}
+\{'created\_at': 'Wed Dec 04 17:13:09 +0000 2019', 'id\_str': '1202274654720643078', 'text': 'RT @euVickkk: não sei oq eu quero mais, os peitos ou a lingerie https://t.co/BYxsxYZLEA', '\_id': ObjectId('5de7e92a8253cc0f76e18588')\}
+\{'created\_at': 'Wed Dec 04 17:13:10 +0000 2019', 'id\_str': '1202274656838987776', 'text': 'RT @dri\_rs: Eu ajudei o Leão, fui mordida pelo leão e hoje tô ajudando o Leão de novo{\ldots} não sei se sou tão boa de coração ou tão otária as…', '\_id': ObjectId('5de7e92b8253cc0f76e18589')\}
+\{'created\_at': 'Wed Dec 04 17:13:10 +0000 2019', 'id\_str': '1202274657061285890', 'text': 'RT @TVBrasil: O cantor Alex Fava resolveu usar a música para falar de temas como solidão da população idosa e depressão. E assim nasceu o P…', '\_id': ObjectId('5de7e92b8253cc0f76e1858a')\}
+\{'created\_at': 'Wed Dec 04 17:13:10 +0000 2019', 'id\_str': '1202274657027665921', 'text': 'RT @MidiasSMBR: O Shawn disse que enviou pro projeto Na Ponta dos Pés um pedacinho de uma música que ele escreveu no piano e que elas prepa…', '\_id': ObjectId('5de7e92b8253cc0f76e1858b')\}
+\{'created\_at': 'Wed Dec 04 17:13:10 +0000 2019', 'id\_str': '1202274657258352641', 'text': '@ptr\_1221 EU ACORDEI 8H E TAMBÉM NÃO SEI', '\_id': ObjectId('5de7e92b8253cc0f76e1858c')\}
+\{'created\_at': 'Wed Dec 04 17:13:09 +0000 2019', 'id\_str': '1202274656667029504', 'text': '\#AniversarioConvoy me gusta escucharles , a veces más que escuchar la música ♥️♥️♥️♥️♥️ https://t.co/aj0fJWL2Z7', '\_id': ObjectId('5de7e92b8253cc0f76e1858d')\}
+\{'created\_at': 'Wed Dec 04 17:13:10 +0000 2019', 'id\_str': '1202274657275142144', 'text': 'Deberia aprender de Kim Seokjin \textbackslash{}n@BTS\_twt', '\_id': ObjectId('5de7e92b8253cc0f76e1858e')\}
+\{'created\_at': 'Wed Dec 04 17:13:10 +0000 2019', 'id\_str': '1202274657401016321', 'text': 'RT @nascimentocaio: As irmãs evangélicas que não cantam música de Iemanjá, mas cantam de maconha. https://t.co/NMWzc67WKz', '\_id': ObjectId('5de7e92b8253cc0f76e1858f')\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        WantReadError                             Traceback (most recent call last)
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/urllib3/contrib/pyopenssl.py in recv\_into(self, *args, **kwargs)
+        279         try:
+    --> 280             return self.connection.recv\_into(*args, **kwargs)
+        281         except OpenSSL.SSL.SysCallError as e:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/OpenSSL/SSL.py in recv\_into(self, buffer, nbytes, flags)
+       1813             result = \_lib.SSL\_read(self.\_ssl, buf, nbytes)
+    -> 1814         self.\_raise\_ssl\_error(self.\_ssl, result)
+       1815 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/OpenSSL/SSL.py in \_raise\_ssl\_error(self, ssl, result)
+       1613         if error == \_lib.SSL\_ERROR\_WANT\_READ:
+    -> 1614             raise WantReadError()
+       1615         elif error == \_lib.SSL\_ERROR\_WANT\_WRITE:
+
+
+        WantReadError: 
+
+        
+    During handling of the above exception, another exception occurred:
+
+
+        KeyboardInterrupt                         Traceback (most recent call last)
+
+        <ipython-input-32-6a9070444200> in <module>()
+          1 \# Iniciando o filtro e gravando os tweets no MongoDB
+    ----> 2 mystream.filter(track=keywords)
+    
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/tweepy/streaming.py in filter(self, follow, track, is\_async, locations, stall\_warnings, languages, encoding, filter\_level)
+        472             self.body['filter\_level'] = filter\_level.encode(encoding)
+        473         self.session.params = \{'delimited': 'length'\}
+    --> 474         self.\_start(is\_async)
+        475 
+        476     def sitestream(self, follow, stall\_warnings=False,
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/tweepy/streaming.py in \_start(self, is\_async)
+        387             self.\_thread.start()
+        388         else:
+    --> 389             self.\_run()
+        390 
+        391     def on\_closed(self, resp):
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/tweepy/streaming.py in \_run(self)
+        287                     self.snooze\_time = self.snooze\_time\_step
+        288                     self.listener.on\_connect()
+    --> 289                     self.\_read\_loop(resp)
+        290             except (Timeout, ssl.SSLError) as exc:
+        291                 \# This is still necessary, as a SSLError can actually be
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/tweepy/streaming.py in \_read\_loop(self, resp)
+        337             length = 0
+        338             while not resp.raw.closed:
+    --> 339                 line = buf.read\_line()
+        340                 stripped\_line = line.strip() if line else line \# line is sometimes None so we need to check here
+        341                 if not stripped\_line:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/tweepy/streaming.py in read\_line(self, sep)
+        198             else:
+        199                 start = len(self.\_buffer)
+    --> 200             self.\_buffer += self.\_stream.read(self.\_chunk\_size)
+        201         return six.b('')
+        202 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/urllib3/response.py in read(self, amt, decode\_content, cache\_content)
+        382             else:
+        383                 cache\_content = False
+    --> 384                 data = self.\_fp.read(amt)
+        385                 if amt != 0 and not data:  \# Platform-specific: Buggy versions of Python.
+        386                     \# Close the connection when no data is returned
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/http/client.py in read(self, amt)
+        447             \# Amount is given, implement using readinto
+        448             b = bytearray(amt)
+    --> 449             n = self.readinto(b)
+        450             return memoryview(b)[:n].tobytes()
+        451         else:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/http/client.py in readinto(self, b)
+        481 
+        482         if self.chunked:
+    --> 483             return self.\_readinto\_chunked(b)
+        484 
+        485         if self.length is not None:
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/http/client.py in \_readinto\_chunked(self, b)
+        576         try:
+        577             while True:
+    --> 578                 chunk\_left = self.\_get\_chunk\_left()
+        579                 if chunk\_left is None:
+        580                     return total\_bytes
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/http/client.py in \_get\_chunk\_left(self)
+        544                 self.\_safe\_read(2)  \# toss the CRLF at the end of the chunk
+        545             try:
+    --> 546                 chunk\_left = self.\_read\_next\_chunk\_size()
+        547             except ValueError:
+        548                 raise IncompleteRead(b'')
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/http/client.py in \_read\_next\_chunk\_size(self)
+        504     def \_read\_next\_chunk\_size(self):
+        505         \# Read the next chunk size from the file
+    --> 506         line = self.fp.readline(\_MAXLINE + 1)
+        507         if len(line) > \_MAXLINE:
+        508             raise LineTooLong("chunk size")
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/socket.py in readinto(self, b)
+        584         while True:
+        585             try:
+    --> 586                 return self.\_sock.recv\_into(b)
+        587             except timeout:
+        588                 self.\_timeout\_occurred = True
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/urllib3/contrib/pyopenssl.py in recv\_into(self, *args, **kwargs)
+        290                 raise
+        291         except OpenSSL.SSL.WantReadError:
+    --> 292             rd = util.wait\_for\_read(self.socket, self.socket.gettimeout())
+        293             if not rd:
+        294                 raise timeout('The read operation timed out')
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/urllib3/util/wait.py in wait\_for\_read(socks, timeout)
+         31     or optionally a single socket if passed in. Returns a list of
+         32     sockets that can be read from immediately. """
+    ---> 33     return \_wait\_for\_io\_events(socks, EVENT\_READ, timeout)
+         34 
+         35 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/urllib3/util/wait.py in \_wait\_for\_io\_events(socks, events, timeout)
+         24             selector.register(sock, events)
+         25         return [key[0].fileobj for key in
+    ---> 26                 selector.select(timeout) if key[1] \& events]
+         27 
+         28 
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/urllib3/util/selectors.py in select(self, timeout)
+        436             fd\_events = \_syscall\_wrapper(self.\_epoll.poll, True,
+        437                                          timeout=timeout,
+    --> 438                                          maxevents=max\_events)
+        439             for fd, event\_mask in fd\_events:
+        440                 events = 0
+
+
+        \textasciitilde{}/anaconda3/lib/python3.6/site-packages/urllib3/util/selectors.py in \_syscall\_wrapper(func, \_, *args, **kwargs)
+         62         and recalculate their timeouts. """
+         63         try:
+    ---> 64             return func(*args, **kwargs)
+         65         except (OSError, IOError, select.error) as e:
+         66             errcode = None
+
+
+        KeyboardInterrupt: 
+
+    \end{Verbatim}
+
+    \subsection{-\/-\textgreater{} Pressione o botão Stop na barra de
+ferramentas para encerrar a captura dos
+Tweets}\label{pressione-o-botuxe3o-stop-na-barra-de-ferramentas-para-encerrar-a-captura-dos-tweets}
+
+    \subsection{Consultando os Dados no
+MongoDB}\label{consultando-os-dados-no-mongodb}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{mystream}\PY{o}{.}\PY{n}{disconnect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} Verificando um documento no collection}
+         \PY{n}{col}\PY{o}{.}\PY{n}{find\PYZus{}one}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} \{'\_id': ObjectId('5de7e5978253cc0f76e184fb'),
+          'created\_at': 'Wed Dec 04 16:57:54 +0000 2019',
+          'id\_str': '1202270816085381120',
+          'text': 'RT @Max\_tsh: 👨\textbackslash{}u200d💻☕How Can you start learning React?\textbackslash{}n\textbackslash{}n\#mtshcode \#Javascript \#typescript \#react \#vuejs \#webdevelopment \#angular \#webdesigner \#…'\}
+\end{Verbatim}
+            
+    \subsection{Análise de Dados com Pandas e
+Scikit-Learn}\label{anuxe1lise-de-dados-com-pandas-e-scikit-learn}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} criando um dataset com dados retornados do MongoDB}
+         \PY{n}{dataset} \PY{o}{=} \PY{p}{[}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{created\PYZus{}at}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{item}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{created\PYZus{}at}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{item}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{p}{\PYZcb{}} \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{col}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} Importando o módulo Pandas para trabalhar com datasets em Python}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Requirement already satisfied: nbconvert in /home/rodrigo/anaconda3/lib/python3.6/site-packages (5.3.1)
+Requirement already satisfied: mistune>=0.7.4 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (0.8.3)
+Requirement already satisfied: jinja2 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (2.10)
+Requirement already satisfied: pygments in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (2.2.0)
+Requirement already satisfied: traitlets>=4.2 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (4.3.2)
+Requirement already satisfied: jupyter\_core in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (4.4.0)
+Requirement already satisfied: nbformat>=4.4 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (4.4.0)
+Requirement already satisfied: entrypoints>=0.2.2 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (0.2.3)
+Requirement already satisfied: bleach in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (2.1.3)
+Requirement already satisfied: pandocfilters>=1.4.1 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (1.4.2)
+Requirement already satisfied: testpath in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbconvert) (0.3.1)
+Requirement already satisfied: MarkupSafe>=0.23 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from jinja2->nbconvert) (1.0)
+Requirement already satisfied: ipython\_genutils in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from traitlets>=4.2->nbconvert) (0.2.0)
+Requirement already satisfied: six in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from traitlets>=4.2->nbconvert) (1.11.0)
+Requirement already satisfied: decorator in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from traitlets>=4.2->nbconvert) (4.3.0)
+Requirement already satisfied: jsonschema!=2.5.0,>=2.4 in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from nbformat>=4.4->nbconvert) (2.6.0)
+Requirement already satisfied: html5lib!=1.0b1,!=1.0b2,!=1.0b3,!=1.0b4,!=1.0b5,!=1.0b6,!=1.0b7,!=1.0b8,>=0.99999999pre in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from bleach->nbconvert) (1.0.1)
+Requirement already satisfied: webencodings in /home/rodrigo/anaconda3/lib/python3.6/site-packages (from html5lib!=1.0b1,!=1.0b2,!=1.0b3,!=1.0b4,!=1.0b5,!=1.0b6,!=1.0b7,!=1.0b8,>=0.99999999pre->bleach->nbconvert) (0.5.1)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} Criando um dataframe a partir do dataset }
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{dataset}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Imprimindo o dataframe}
+         \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:}                          created\_at  \textbackslash{}
+         0    Wed Dec 04 16:57:54 +0000 2019   
+         1    Wed Dec 04 16:57:54 +0000 2019   
+         2    Wed Dec 04 16:57:56 +0000 2019   
+         3    Wed Dec 04 16:57:58 +0000 2019   
+         4    Wed Dec 04 16:57:59 +0000 2019   
+         5    Wed Dec 04 16:57:59 +0000 2019   
+         6    Wed Dec 04 16:58:02 +0000 2019   
+         7    Wed Dec 04 16:58:03 +0000 2019   
+         8    Wed Dec 04 16:58:04 +0000 2019   
+         9    Wed Dec 04 16:58:05 +0000 2019   
+         10   Wed Dec 04 16:58:05 +0000 2019   
+         11   Wed Dec 04 16:58:06 +0000 2019   
+         12   Wed Dec 04 16:59:54 +0000 2019   
+         13   Wed Dec 04 16:59:54 +0000 2019   
+         14   Wed Dec 04 16:59:55 +0000 2019   
+         15   Wed Dec 04 16:59:56 +0000 2019   
+         16   Wed Dec 04 16:59:56 +0000 2019   
+         17   Wed Dec 04 16:59:59 +0000 2019   
+         18   Wed Dec 04 16:59:59 +0000 2019   
+         19   Wed Dec 04 17:00:00 +0000 2019   
+         20   Wed Dec 04 17:00:00 +0000 2019   
+         21   Wed Dec 04 17:00:00 +0000 2019   
+         22   Wed Dec 04 17:00:00 +0000 2019   
+         23   Wed Dec 04 17:00:00 +0000 2019   
+         24   Wed Dec 04 17:00:01 +0000 2019   
+         25   Wed Dec 04 17:00:01 +0000 2019   
+         26   Wed Dec 04 17:00:02 +0000 2019   
+         27   Wed Dec 04 17:00:03 +0000 2019   
+         28   Wed Dec 04 17:00:03 +0000 2019   
+         29   Wed Dec 04 17:00:03 +0000 2019   
+         ..                              {\ldots}   
+         119  Wed Dec 04 17:13:05 +0000 2019   
+         120  Wed Dec 04 17:13:06 +0000 2019   
+         121  Wed Dec 04 17:13:06 +0000 2019   
+         122  Wed Dec 04 17:13:07 +0000 2019   
+         123  Wed Dec 04 17:13:07 +0000 2019   
+         124  Wed Dec 04 17:13:07 +0000 2019   
+         125  Wed Dec 04 17:13:07 +0000 2019   
+         126  Wed Dec 04 17:13:07 +0000 2019   
+         127  Wed Dec 04 17:13:07 +0000 2019   
+         128  Wed Dec 04 17:13:07 +0000 2019   
+         129  Wed Dec 04 17:13:07 +0000 2019   
+         130  Wed Dec 04 17:13:07 +0000 2019   
+         131  Wed Dec 04 17:13:07 +0000 2019   
+         132  Wed Dec 04 17:13:08 +0000 2019   
+         133  Wed Dec 04 17:13:08 +0000 2019   
+         134  Wed Dec 04 17:13:08 +0000 2019   
+         135  Wed Dec 04 17:13:08 +0000 2019   
+         136  Wed Dec 04 17:13:08 +0000 2019   
+         137  Wed Dec 04 17:13:09 +0000 2019   
+         138  Wed Dec 04 17:13:09 +0000 2019   
+         139  Wed Dec 04 17:13:09 +0000 2019   
+         140  Wed Dec 04 17:13:09 +0000 2019   
+         141  Wed Dec 04 17:13:09 +0000 2019   
+         142  Wed Dec 04 17:13:10 +0000 2019   
+         143  Wed Dec 04 17:13:10 +0000 2019   
+         144  Wed Dec 04 17:13:10 +0000 2019   
+         145  Wed Dec 04 17:13:10 +0000 2019   
+         146  Wed Dec 04 17:13:09 +0000 2019   
+         147  Wed Dec 04 17:13:10 +0000 2019   
+         148  Wed Dec 04 17:13:10 +0000 2019   
+         
+                                                           text  
+         0    RT @Max\_tsh: 👨‍💻☕How Can you start learning Re{\ldots}  
+         1    @USATODAYmoney Looking for all Data entry Micr{\ldots}  
+         2    @XiaoLiMeng1 Meng is discussing the importance{\ldots}  
+         3    RT @SenHawleyPress: Senator Hawley's "Do Not T{\ldots}  
+         4    RT @fsnetworker: Red Hat beefs up Kubernetes a{\ldots}  
+         5    RT @nixcraft: Two malicious Python libraries c{\ldots}  
+         6    Adding letters to numbers in Pandas column htt{\ldots}  
+         7    @realDonaldTrump @NATO Looking for all Data en{\ldots}  
+         8    RT @AtteKaleva: Hallitus palkkasi aloittaessaa{\ldots}  
+         9    RT @tjl: It's great to hear competitiveness co{\ldots}  
+         10       @TheTweetOfGod Monty Python Life of Brian DVD  
+         11   RT @nixcraft: Two malicious Python libraries c{\ldots}  
+         12   RT @nixcraft: Two malicious Python libraries c{\ldots}  
+         13   RT @trjpphelan: Some really useful books in he{\ldots}  
+         14   Two malicious Python libraries caught stealing{\ldots}  
+         15   RT @MSaylorPhD: Must read for educators - Disa{\ldots}  
+         16   RT @virgiltexas: theres been maybe 7 competiti{\ldots}  
+         17   RT @BTSCHARTSLAYER: The victors at Delphi were{\ldots}  
+         18   RT @virgiltexas: theres been maybe 7 competiti{\ldots}  
+         19   Hey pyData LA 2019! Meet Nina Zumel and John M{\ldots}  
+         20   RT @ProgrammerBooks: Advanced Data Analytics U{\ldots}  
+         21   In this age of social networks and digital con{\ldots}  
+         22   🎉TensorFlow 2.1.0-rc0 has been released! \textbackslash{}n \textbackslash{}n{\ldots}  
+         23   \#ÚltimosTalleres2019 Si quieres aprender a acc{\ldots}  
+         24   2020 brings some big changes to US \#privacy la{\ldots}  
+         25   Get Exclusive Deal on Data Science 2020 Bundle{\ldots}  
+         26   Day 4 of \#DevDecember is one of my favorite pi{\ldots}  
+         27   Phase-field simulation of solidification micro{\ldots}  
+         28   RT @rschon: @XiaoLiMeng1 Guthrie: Data is a co{\ldots}  
+         29   How the \#IoT and \#BigData are redefining \#reta{\ldots}  
+         ..                                                 {\ldots}  
+         119  Andando o mais devagar possível dentro da UFCG{\ldots}  
+         120                                Sdds 2014 llkkkkkkk  
+         121  Hoy la cosa va más de música que sé escribir, {\ldots}  
+         122  RT @ericat\_lol: Falando mais do Absolut aqui. {\ldots}  
+         123  agora a gente se entendeu, não sei pq nos afas{\ldots}  
+         124  RT @viitoriacardozo: incrível como james arthu{\ldots}  
+         125  Primeira vez que vejo alguém colocar meu nome {\ldots}  
+         126  RT @hoscass: "O BTS n*o devia ter ganhado o SO{\ldots}  
+         127  RT @MetralletaPD: AVISO!!!🗣️SUENA CARACAS!🎉\textbackslash{}nA{\ldots}  
+         128  RT @hoscass: "O BTS n*o devia ter ganhado o SO{\ldots}  
+         129  RT @flyyseokjin: o Seokjin dizendo que existe {\ldots}  
+         130  RT @ThammyCaroIine: Eu amo essa música @matue3{\ldots}  
+         131  RT @sohumcara: é muito bom ouvir o quanto você{\ldots}  
+         132  RT @leticia\_izac: Não sei o que vai ser da min{\ldots}  
+         133             O fantastico mundo de gumball monteiro  
+         134                         Kanye West no reveião?????  
+         135  RT @limitizando: Não sei quem é mais doido, a {\ldots}  
+         136  RT @sohumcara: é muito bom ouvir o quanto você{\ldots}  
+         137  RT @joliefairly: o dia que eu dedicar \&gt;qual{\ldots}  
+         138  [04/12 14:09] Marcos Henrique💙: Tá fzd a festa{\ldots}  
+         139     situações que eu não sei lidar e so sei chorar  
+         140  RT @berreccaaa: Eu era uma aluna tão boa, não {\ldots}  
+         141  RT @euVickkk: não sei oq eu quero mais, os pei{\ldots}  
+         142  RT @dri\_rs: Eu ajudei o Leão, fui mordida pelo{\ldots}  
+         143  RT @TVBrasil: O cantor Alex Fava resolveu usar{\ldots}  
+         144  RT @MidiasSMBR: O Shawn disse que enviou pro p{\ldots}  
+         145           @ptr\_1221 EU ACORDEI 8H E TAMBÉM NÃO SEI  
+         146  \#AniversarioConvoy me gusta escucharles , a ve{\ldots}  
+         147         Deberia aprender de Kim Seokjin \textbackslash{}n@BTS\_twt  
+         148  RT @nascimentocaio: As irmãs evangélicas que n{\ldots}  
+         
+         [149 rows x 2 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Importando o módulo Scikit Learn}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}extraction}\PY{n+nn}{.}\PY{n+nn}{text} \PY{k}{import} \PY{n}{CountVectorizer}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} Usando o método CountVectorizer para criar uma matriz de documentos}
+         \PY{n}{cv} \PY{o}{=} \PY{n}{CountVectorizer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{count\PYZus{}matrix} \PY{o}{=} \PY{n}{cv}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Contando o número de ocorrências das principais palavras em nosso dataset}
+         \PY{n}{word\PYZus{}count} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{cv}\PY{o}{.}\PY{n}{get\PYZus{}feature\PYZus{}names}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{word}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{word\PYZus{}count}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{count\PYZus{}matrix}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{word\PYZus{}count} \PY{o}{=} \PY{n}{word\PYZus{}count}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{word\PYZus{}count}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{50}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:}                                  word  count
+         0                                  rt     29
+         1                                  co     20
+         2                               https     20
+         3                              python     14
+         4                                 the     13
+         5                           yontengop     13
+         6                                  to     11
+         7                                  ぼく     10
+         8                             上司さんメール     10
+         9                                 and      7
+         10                                for      6
+         11                               data      6
+         12                          ずっとpython      5
+         13                          とかいうプログラム      5
+         14                                 件名      5
+         15                               一体何が      5
+         16                               上司さん      5
+         17                                big      5
+         18                       おっいってらっしゃいませ      5
+         19  俺もaiとか勉強するために今日は外部のaiセミナー行ってくるやでー      5
+         20                                 of      5
+         21                                助けて      5
+         22                                午前中      5
+         23                    休憩中に電話で聞いたところでは      4
+         24                                 in      4
+         25                               ようこそ      4
+         26                               だろうが      4
+         27             it寄りセミナーの中でもかなりアグレッシブで      4
+         28                    \_nametaketakewo      4
+         29                                 is      4
+         30                        なお上司さんはプログラ      4
+         31                         なーにがようこそだよ      4
+         32                         よろしくお願いします      4
+         33                          とか言い出すんだよ      4
+         34                           指摘や質問が飛ぶ      4
+         35                                 とか      4
+         36                     という尖りまくった内容らしい      4
+         37                              歓声や罵声      4
+         38                                are      4
+         39                            観客からは適宜      4
+         40                               xatz      4
+         41    じゃあその場で講師がpythonをライブコーディングして書いて      4
+         42                           mac買った時さ      4
+         43                           palantir      4
+         44                            bigdata      4
+         45                         dozendolls      4
+         46                      pythonの授業の教員が      4
+         47                       人様の家に来てるんだから      4
+         48                             お邪魔します      4
+         49                        初めて起動したらあいつ      4
+\end{Verbatim}
+            
+    \section{Fim}\label{fim}
+
+    \subsubsection{Obrigado - Data Science Academy -
+facebook.com/dsacademybr}\label{obrigado---data-science-academy---facebook.comdsacademybr}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
